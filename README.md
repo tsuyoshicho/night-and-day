@@ -49,12 +49,4 @@ Both settings are false by default; you only need to add these if you want to sw
 
 ## known issues
 
-If your colourscheme invokes the command `hi clear` (many do), syntax highlighting may be disabled for some plugins (such as EasyMotion) upon a colourscheme change. The solution for now is to define a function `NightdayPost()` in your `vimrc` to correct any problems. This function (if defined) runs after each colourscheme change.
-
-For instance, to fix EasyMotion (if necessary, change the path of `highlight.vim`):
-
-~~~
-function! NightdayPost()
-silent! so ~/.vim/bundle/vim-easymotion/autoload/EasyMotion/highlight.vim
-endfunction
-~~~
+Syntax highlighting is disabled for EasyMotion (and likely other plugins) upon colour scheme change, provided the colour scheme includes the (oft-present) command `hi clear`. For now, a patch fix is automatically applied by the plugin. Please report if this fix doesn't work for you, or if other issues are encountered.
