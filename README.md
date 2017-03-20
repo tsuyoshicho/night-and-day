@@ -29,7 +29,7 @@ let g:nd_night_theme = 'petrel'
 
 Simply drop the above code into your `vimrc`, editing the theme names as needed.
 
-The **thresholds** of day and night are set with `g:nd_dawn_time` and `g:nd_dusk_time`. These variables accept an integer value from 0 to 23, representing an hour on the 24-hour clock (0 is midnight, 1 is 1 AM, 23 is 11 PM). For instance, to have your day theme activate at 8AM and your night theme activate at 8PM:
+The **thresholds** of day and night are set with `g:nd_dawn_time` and `g:nd_dusk_time`. These variables accept an integer value from 0 to 23, representing hours on the 24-hour clock (0 is midnight, 1 is 1 AM, 23 is 11 PM). For instance, to have your day theme activate at 8AM and your night theme activate at 8PM (the default values):
 
 ~~~
 let g:nd_dawn_time = 8
