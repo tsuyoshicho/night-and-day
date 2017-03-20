@@ -4,7 +4,7 @@ A Vim plugin to automatically switch between your "day theme" and "night theme".
 
 ## how it works
 
-Some folks like to flip between a light theme during the day and a dark theme at night. When Vim is launched, night-and-day checks the time and loads the appropriate theme. It then runs in the background, ready to switch the theme if you happen to be running Vim on the day/night threshold.
+Some folks like to flip between a light theme during the day and a dark theme at night. When Vim is launched, night-and-day checks the time and loads the appropriate theme. It then runs in the background, ready to switch the theme if you happen to be running Vim as night falls, or as morning breaks.
 
 ## installation
 
