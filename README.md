@@ -2,6 +2,8 @@
 
 A Vim plugin to automatically switch between your "day theme" and "night theme".
 
+<img src="image.jpg" width="889">
+
 ## how it works
 
 Some folks like to flip between a light theme during the day and a dark theme at night. When Vim is launched, night-and-day checks the time and loads the appropriate theme. It then runs in the background, ready to switch the theme if you happen to be running Vim as night falls, or as morning breaks.
@@ -55,6 +57,8 @@ let g:nd_night_theme = 'solarized'
 let g:nd_night_bgdark = 1
 ~~~
 
-## known issues
+## notes
 
-Syntax highlighting is disabled for EasyMotion (and likely other plugins) upon colour scheme change, provided the colour scheme includes the (oft-present) command `hi clear`. For now, a patch fix is automatically applied by the plugin. Please report if this fix doesn't work for you, or if other issues are encountered.
+Syntax highlighting is accidentally disabled for EasyMotion (and likely other plugins) upon colour scheme change, provided the colour scheme includes the (oft-present) command `hi clear`. For now, a patch fix is automatically applied by the plugin. Please [report](https://github.com/nightsense/night-and-day/issues) if this fix doesn't work for you, or if other issues are encountered.
+
+Photo by [Neil Tackaberry](https://www.flickr.com/photos/23629083@N03/6904426431), licensed [CC BY-ND 2.0](https://creativecommons.org/licenses/by-nd/2.0/).
