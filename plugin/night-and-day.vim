@@ -14,6 +14,9 @@ function! Nightday()
       if g:nd_night_bgdark == 1
         exec 'set background=dark'
       endif
+      if exists("*NightdayPost")
+        call NightdayPost()
+      endif
     endif
   else
     if g:nd_current_theme != g:nd_day_theme
@@ -21,6 +24,9 @@ function! Nightday()
       let g:nd_current_theme = g:nd_day_theme
       if g:nd_day_bgdark == 1
         exec 'set background=dark'
+      endif
+      if exists("*NightdayPost")
+        call NightdayPost()
       endif
     endif
   endif
