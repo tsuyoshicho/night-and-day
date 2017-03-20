@@ -2,7 +2,7 @@
 
 A Vim plugin to automatically switch between your "day theme" and "night theme".
 
-<img src="image.jpg" width="889">
+<img src="image.jpg" width="500">
 
 ## how it works
 
