@@ -47,6 +47,14 @@ let g:nd_night_bgdark  = 1
 
 Both settings are false by default; you only need to add these if you want to switch them to true. (If `background=` is already defined in your `vimrc`, remove it.)
 
+So for instance, if you wanted to switch between "solarized light" during the day and "solarized dark" at night:
+
+~~~
+let g:nd_day_theme   = 'solarized'
+let g:nd_night_theme = 'solarized'
+let g:nd_night_bgdark = 1
+~~~
+
 ## known issues
 
 Syntax highlighting is disabled for EasyMotion (and likely other plugins) upon colour scheme change, provided the colour scheme includes the (oft-present) command `hi clear`. For now, a patch fix is automatically applied by the plugin. Please report if this fix doesn't work for you, or if other issues are encountered.
