@@ -20,7 +20,7 @@ For easy management of Vim plugins, try a plugin manager. With the [Vundle](http
 
 Configuring night-and-day involves setting variables in your `vimrc` file.
 
-Day and night **themes** are set with `g:nd_day_theme` and `g:nd_night_theme`. For instance, to set your day theme to "seagull" and your night theme to "petrel":
+Day and night **themes** are set with `g:nd_day_theme` and `g:nd_night_theme`. For instance, to set your day theme to [seagull](https://github.com/nightsense/seabird) and your night theme to petrel:
 
 ~~~
 let g:nd_day_theme = 'seagull'
@@ -47,7 +47,7 @@ let g:nd_night_bgdark  = 1
 
 Both settings are false by default; you only need to add these if you want to switch them to true. (If `background=` is already defined in your `vimrc`, remove it.)
 
-So for instance, if you wanted to switch between "solarized light" during the day and "solarized dark" at night:
+So for instance, if you wanted to switch between [solarized](https://github.com/altercation/vim-colors-solarized) light during the day and solarized dark at night:
 
 ~~~
 let g:nd_day_theme   = 'solarized'
