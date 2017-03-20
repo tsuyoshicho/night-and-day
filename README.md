@@ -18,7 +18,7 @@ For easy management of Vim plugins, try a plugin manager. With the [Vundle](http
 
 ## configuration
 
-Configuring night-and-day involves setting variables in your `vimrc` file. Each variable is explained here, along with sample code.
+Configuring night-and-day involves setting variables in your `vimrc` file.
 
 Day and night **themes** are set with `g:nd_day_theme` and `g:nd_night_theme`. For instance, to set your day theme to "seagull" and your night theme to "petrel":
 
