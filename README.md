@@ -29,12 +29,14 @@ let g:nd_night_theme = 'petrel'
 
 Simply drop the above code into your `vimrc`, editing the theme names as needed.
 
-The **thresholds** of day and night are set with `g:nd_dawn_time` and `g:nd_dusk_time`. These variables accept an integer value from 0 to 23, representing hours on the 24-hour clock (0 is midnight, 1 is 1 AM, 23 is 11 PM). For instance, to have your day theme activate at 8AM and your night theme activate at 8PM (the default values):
+The **thresholds** of day and night are set with `g:nd_dawn_time` and `g:nd_dusk_time`. These variables accept an integer value from 0 to 23, representing hours on the 24-hour clock (0 is midnight, 1 is 1 AM, 23 is 11 PM). For instance, to have your day theme activate at 8AM and your night theme activate at 8PM:
 
 ~~~
 let g:nd_dawn_time = 8
 let g:nd_dusk_time = 20
 ~~~
+
+These are the default values; if you're happy with them, you can leave these settings out of your `vimrc`.
 
 By default, Vim applies `background=light` to colourschemes. If you want to assign **`background=dark`**, you can use `nd_day_bgdark` and/or `nd_night_bgdark`, like so (0 means false, 1 means true):
 
@@ -42,6 +44,8 @@ By default, Vim applies `background=light` to colourschemes. If you want to assi
 let g:nd_day_bgdark    = 0
 let g:nd_night_bgdark  = 1
 ~~~
+
+Both settings are false by default; you only need to add these if you want to switch them to true.
 
 ## known issues
 
