@@ -36,7 +36,7 @@ let g:nd_dawn_time = 8
 let g:nd_dusk_time = 20
 ~~~
 
-8AM/8PM are the default values; if you're happy with this timing, you can leave these settings out of your `vimrc`.
+8AM and 8PM are the default values; if you're happy with this timing, you can leave these settings out of your `vimrc`.
 
 By default, Vim applies `background=light` to colourschemes. If you want to assign **`background=dark`**, you can use `nd_day_bgdark` and/or `nd_night_bgdark`, like so (0 means false, 1 means true):
 
