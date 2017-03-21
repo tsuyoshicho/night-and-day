@@ -59,6 +59,6 @@ let g:nd_night_bgdark = 1
 
 ## notes
 
-Syntax highlighting is accidentally disabled for EasyMotion (and likely other plugins) upon colour scheme change, provided the colour scheme includes the (oft-present) command `hi clear`. For now, a patch fix is automatically applied by the plugin. Please [report](https://github.com/nightsense/night-and-day/issues) if this fix doesn't work for you, or if other issues are encountered.
+When night-and-day triggers a colour scheme change, syntax highlighting is accidentally disabled for EasyMotion (and likely other plugins). For now, a patch fix is automatically applied by the plugin. Please [report](https://github.com/nightsense/night-and-day/issues) if this fix doesn't work for you, or if other issues are encountered.
 
 Photo by [Neil Tackaberry](https://www.flickr.com/photos/23629083@N03/6904426431), licensed [CC BY-ND 2.0](https://creativecommons.org/licenses/by-nd/2.0/).
