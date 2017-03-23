@@ -10,7 +10,22 @@ Some folks like to flip between a light theme during the day and a dark theme at
 
 ## installation
 
-If you don't already have a preferred method of Vim plugin installation, try [Vundle](https://github.com/VundleVim/Vundle.vim). Add `Plugin 'nightsense/night-and-day'` to the list of plugins in your `vimrc`, then run `VundleUpdate`. (To automatically keep plugins up to date with Vundle, add `vim +VundleUpdate +qall` to a startup script or cron job.)
+Vim plugins can be managed with [Vundle](https://github.com/VundleVim/Vundle.vim). To get up and running, run `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`, then add the following block to the top of `vimrc`:
+
+~~~
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'nightsense/night-and-day'
+call vundle#end()
+filetype plugin indent on
+~~~
+
+Then, within Vim, run `VundleUpdate`.
+
+To automatically keep plugins up to date with Vundle, add `vim +VundleUpdate +qall` to a startup script or cron job.
 
 ## configuration
 
