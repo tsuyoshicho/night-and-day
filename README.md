@@ -44,7 +44,7 @@ let g:nd_day_theme = 'seagull'
 let g:nd_night_theme = 'petrel'
 ~~~
 
-The **thresholds** of day and night are set with `g:nd_dawn_time` and `g:nd_dusk_time`. Both variables accept an integer value from 0 to 23, representing hours on the 24-hour clock (0 is midnight, 1 is 1 AM, 23 is 11 PM). For instance, to have the day theme activate at 8AM and night theme activate at 8PM (the default values):
+The **thresholds** of day and night are set with `g:nd_dawn_time` and `g:nd_dusk_time`. Both variables accept an integer value from 0 to 23, representing hours on the 24-hour clock (0 is midnight, 23 is 11 PM). For instance, to have the day theme activate at 8AM and night theme activate at 8PM (the default values):
 
 ~~~
 let g:nd_dawn_time = 8
