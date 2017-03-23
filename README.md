@@ -1,6 +1,6 @@
 # night-and-day
 
-A Vim plugin to automatically switch between your "day theme" and "night theme".
+A Vim plugin to automatically switch between a "day theme" and "night theme".
 
 <img src="image.jpg" width="500">
 
@@ -35,36 +35,32 @@ To automatically keep plugins up to date with Vundle, add `vim +VundleUpdate +qa
 
 ## configuration
 
-Configuring night-and-day involves setting variables in your `vimrc` file.
+Configuring night-and-day involves setting variables in `vimrc`. (Remove any settings for `colorscheme` or `background` before using night-and-day.)
 
-Day and night **themes** are set with `g:nd_day_theme` and `g:nd_night_theme`. For instance, to set your day theme to [seagull](https://github.com/nightsense/seabird) and your night theme to petrel:
+Day and night **themes** are set with `g:nd_day_theme` and `g:nd_night_theme`. For instance, to set the day theme to [seagull](https://github.com/nightsense/seabird) and night theme to petrel:
 
 ~~~
 let g:nd_day_theme = 'seagull'
 let g:nd_night_theme = 'petrel'
 ~~~
 
-Simply drop the above code into your `vimrc`, editing the theme names as needed. (If a theme is already defined in your `vimrc`, remove it.)
-
-The **thresholds** of day and night are set with `g:nd_dawn_time` and `g:nd_dusk_time`. Each of these variables accepts an integer value from 0 to 23, representing hours on the 24-hour clock (0 is midnight, 1 is 1 AM, 23 is 11 PM). For instance, to have your day theme activate at 8AM and your night theme activate at 8PM:
+The **thresholds** of day and night are set with `g:nd_dawn_time` and `g:nd_dusk_time`. Each of these variables accepts an integer value from 0 to 23, representing hours on the 24-hour clock (0 is midnight, 1 is 1 AM, 23 is 11 PM). For instance, to have the day theme activate at 8AM and night theme activate at 8PM (the default values):
 
 ~~~
 let g:nd_dawn_time = 8
 let g:nd_dusk_time = 20
 ~~~
 
-8AM and 8PM are the default values; if you're happy with this timing, you can leave these settings out of your `vimrc`.
-
-By default, Vim applies `background=light` to colourschemes. If you want to assign **`background=dark`**, you can use `nd_day_bgdark` and/or `nd_night_bgdark`, like so (0 means false, 1 means true):
+By default, Vim applies `background=light` to colour schemes. In order to assign **`background=dark`**, use `nd_day_bgdark` and/or `nd_night_bgdark`, like so:
 
 ~~~
 let g:nd_day_bgdark    = 0
 let g:nd_night_bgdark  = 1
 ~~~
 
-Both settings are false by default; you only need to add these if you want to switch them to true. (If `background=` is already defined in your `vimrc`, remove it.)
+(0 means false, 1 means true; both are false by default.)
 
-So for instance, if you wanted to switch between [solarized](https://github.com/altercation/vim-colors-solarized) light during the day and solarized dark at night:
+One popular setup is to switch between [solarized](https://github.com/altercation/vim-colors-solarized) light during the day and solarized dark at night:
 
 ~~~
 let g:nd_day_theme   = 'solarized'
@@ -74,6 +70,6 @@ let g:nd_night_bgdark = 1
 
 ## notes
 
-When night-and-day triggers a colour scheme change, syntax highlighting is accidentally disabled for EasyMotion (and likely other plugins). For now, a patch fix is automatically applied by the plugin. Please [report](https://github.com/nightsense/night-and-day/issues) if this fix doesn't work for you, or if other issues are encountered.
+When night-and-day triggers a colour scheme change, syntax highlighting is accidentally disabled for EasyMotion (and likely other plugins). For now, a patch fix is automatically applied by the plugin. Feel free to [report](https://github.com/nightsense/night-and-day/issues) any issues.
 
 Photo by [Neil Tackaberry](https://www.flickr.com/photos/23629083@N03/6904426431), licensed [CC BY-ND 2.0](https://creativecommons.org/licenses/by-nd/2.0/).
