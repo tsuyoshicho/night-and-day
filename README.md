@@ -71,6 +71,6 @@ let g:nd_night_bgdark = 1
 
 ## notes
 
-When night-and-day triggers a colour scheme change, syntax highlighting is accidentally disabled for EasyMotion (and likely other plugins). For now, a patch fix is automatically applied by the plugin. Feel free to [report](https://github.com/nightsense/night-and-day/issues) any issues.
+When night-and-day triggers a colour scheme change, syntax highlighting is accidentally disabled for EasyMotion (and likely other plugins). For now, a patch fix for EasyMotion is automatically applied by the plugin. Feel free to [report](https://github.com/nightsense/night-and-day/issues) any issues.
 
 Photo by [Neil Tackaberry](https://www.flickr.com/photos/23629083@N03/6904426431), licensed [CC BY-ND 2.0](https://creativecommons.org/licenses/by-nd/2.0/).
