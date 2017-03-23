@@ -10,7 +10,13 @@ Some folks like to flip between a light theme during the day and a dark theme at
 
 ## installation
 
-Vim plugins can be managed with [Vundle](https://github.com/VundleVim/Vundle.vim). To get up and running, run `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`, then add the following block to the top of `vimrc`:
+Vim plugins can be managed with [Vundle](https://github.com/VundleVim/Vundle.vim), which can be installed by running the following command in a terminal:
+
+~~~
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+~~~
+
+Next, add the following block to the top of `vimrc`:
 
 ~~~
 set nocompatible
