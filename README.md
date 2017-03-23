@@ -10,13 +10,7 @@ Some folks like to flip between a light theme during the day and a dark theme at
 
 ## installation
 
-### option A: manually
-
-Download [`night-and-day.vim`](https://raw.githubusercontent.com/nightsense/night-and-day/master/plugin/night-and-day.vim) from this repository and place in directory `~/.vim/plugin/`.
-
-### option B: using a plugin manager
-
-For easy management of Vim plugins, try a plugin manager. With the [Vundle](https://github.com/VundleVim/Vundle.vim) plugin manager, for instance, just add `Plugin 'nightsense/night-and-day'` to the list of plugins in your `vimrc`, then run `VundleUpdate`. (To automatically keep plugins up to date with Vundle, add `vim +VundleUpdate +qall` to a startup script or cron job.)
+If you don't already have a preferred method of Vim plugin installation, try [Vundle](https://github.com/VundleVim/Vundle.vim). Add `Plugin 'nightsense/night-and-day'` to the list of plugins in your `vimrc`, then run `VundleUpdate`. (To automatically keep plugins up to date with Vundle, add `vim +VundleUpdate +qall` to a startup script or cron job.)
 
 ## configuration
 
