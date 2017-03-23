@@ -13,7 +13,7 @@ Some folks like to flip between a light theme during the day and a dark theme at
 Vim plugins can be managed with [Vundle](https://github.com/VundleVim/Vundle.vim), which can be installed by running the following command in a terminal:
 
 ~~~
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ~~~
 
 Next, add the following to the top of `vimrc`:
