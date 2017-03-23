@@ -60,11 +60,12 @@ let g:nd_night_bgdark  = 1
 
 (0 means false, 1 means true; both are false by default.)
 
-One popular setup is to switch between [solarized](https://github.com/altercation/vim-colors-solarized) light during the day and solarized dark at night:
+Example setup: switch to [solarized](https://github.com/altercation/vim-colors-solarized) light at 7AM, solarized dark at 8PM:
 
 ~~~
 let g:nd_day_theme   = 'solarized'
 let g:nd_night_theme = 'solarized'
+let g:nd_dawn_time = 7
 let g:nd_night_bgdark = 1
 ~~~
 
