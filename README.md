@@ -16,7 +16,7 @@ Vim plugins can be managed with [Vundle](https://github.com/VundleVim/Vundle.vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
 ~~~
 
-Next, add the following block to the top of `vimrc`:
+Next, add the following to the top of `vimrc`:
 
 ~~~
 set nocompatible
