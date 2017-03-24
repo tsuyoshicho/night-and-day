@@ -4,8 +4,8 @@ A Vim plugin to automatically switch between a "day theme" and "night theme".
 
 In order to use this plugin, **two dependencies must be installed**:
 
-- vim-colorscheme-switcher(https://github.com/xolox/vim-colorscheme-switcher)
-- vim-misc(https://github.com/xolox/vim-misc)
+- [vim-colorscheme-switcher](https://github.com/xolox/vim-colorscheme-switcher)
+- [vim-misc](https://github.com/xolox/vim-misc)
 
 <img src="image.jpg" width="500">
 
