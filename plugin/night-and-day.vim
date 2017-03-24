@@ -8,11 +8,6 @@ let g:nd_dusk_time      = get(g:, 'nd_dusk_time', 20)
 let g:nd_current_theme  = ''
 let g:nd_current_bgdark = ''
 
-" EasyMotion highlighting fix
-function! NightdayPost()
-  silent! so ~/.vim/bundle/vim-easymotion/autoload/EasyMotion/highlight.vim
-endfunction
-
 " theme switching function
 function! Nightday()
   if strftime("%H") < g:nd_dawn_time || strftime("%H") + 1 > g:nd_dusk_time
