@@ -42,7 +42,7 @@ To automatically keep plugins up to date with Vundle, add `vim +VundleUpdate +qa
 
 ## configuration
 
-Configuring night-and-day involves setting variables in `vimrc`. (Remove any settings for `colorscheme` or `background` before using night-and-day.)
+Configuring night-and-day involves setting variables in `vimrc`.
 
 Day and night **themes** are set with `g:nd_day_theme` and `g:nd_night_theme`. For instance, to set the day theme to [seagull](https://github.com/nightsense/seabird) and night theme to petrel:
 
