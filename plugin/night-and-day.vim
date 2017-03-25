@@ -18,6 +18,8 @@ function! Nightday()
     if g:nd_current_bgdark != g:nd_night_bgdark
       if g:nd_night_bgdark == 1
         exec 'set background=dark'
+      else
+        exec 'set background=light'
       endif
     endif
   else
@@ -28,6 +30,8 @@ function! Nightday()
     if g:nd_current_bgdark != g:nd_day_bgdark
       if g:nd_day_bgdark == 1
         exec 'set background=dark'
+      else
+        exec 'set background=light'
       endif
     endif
   endif
