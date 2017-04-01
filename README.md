@@ -1,6 +1,6 @@
 # night-and-day
 
-A Vim plugin to automatically switch between a "day theme" and "night theme".
+A Vim plugin to automatically switch between a 'day theme' and 'night theme'.
 
 In order to use this plugin, **two dependencies must be installed**:
 
