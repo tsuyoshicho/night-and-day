@@ -11,10 +11,6 @@ let g:nd_current_bgdark = ''
 " theme switching function
 function! Nightday()
   if strftime("%H") < g:nd_dawn_time || strftime("%H") + 1 > g:nd_dusk_time
-    if g:nd_current_theme != g:nd_night_theme
-      call xolox#colorscheme_switcher#switch_to(g:nd_night_theme)
-      let g:nd_current_theme = g:nd_night_theme
-    endif
     if g:nd_current_bgdark != g:nd_night_bgdark
       if g:nd_night_bgdark == 1
         exec 'set background=dark'
@@ -22,17 +18,21 @@ function! Nightday()
         exec 'set background=light'
       endif
     endif
-  else
-    if g:nd_current_theme != g:nd_day_theme
-      call xolox#colorscheme_switcher#switch_to(g:nd_day_theme)
-      let g:nd_current_theme = g:nd_day_theme
+    if g:nd_current_theme != g:nd_night_theme
+      call xolox#colorscheme_switcher#switch_to(g:nd_night_theme)
+      let g:nd_current_theme = g:nd_night_theme
     endif
+  else
     if g:nd_current_bgdark != g:nd_day_bgdark
       if g:nd_day_bgdark == 1
         exec 'set background=dark'
       else
         exec 'set background=light'
       endif
+    endif
+    if g:nd_current_theme != g:nd_day_theme
+      call xolox#colorscheme_switcher#switch_to(g:nd_day_theme)
+      let g:nd_current_theme = g:nd_day_theme
     endif
   endif
 endfunction
