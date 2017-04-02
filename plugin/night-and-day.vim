@@ -14,8 +14,10 @@ function! Nightday()
     if g:nd_current_bgdark != g:nd_night_bgdark
       if g:nd_night_bgdark == 1
         exec 'set background=dark'
+        let g:nd_current_bgdark = 1
       else
         exec 'set background=light'
+        let g:nd_current_bgdark = 0
       endif
     endif
     if g:nd_current_theme != g:nd_night_theme
@@ -26,8 +28,10 @@ function! Nightday()
     if g:nd_current_bgdark != g:nd_day_bgdark
       if g:nd_day_bgdark == 1
         exec 'set background=dark'
+        let g:nd_current_bgdark = 1
       else
         exec 'set background=light'
+        let g:nd_current_bgdark = 0
       endif
     endif
     if g:nd_current_theme != g:nd_day_theme
