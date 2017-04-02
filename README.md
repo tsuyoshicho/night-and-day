@@ -1,4 +1,4 @@
-# `NIGHT-AND-DAY`
+# night-and-day
 
 A Vim plugin to automatically switch between a 'day theme' and 'night theme'.
 
