@@ -38,8 +38,6 @@ filetype plugin indent on
 
 Then, within Vim, run `VundleUpdate`.
 
-To automatically keep plugins up to date with Vundle, add `vim +VundleUpdate +qall` to a startup script or cron job.
-
 ## configuration
 
 Configuring night-and-day involves setting variables in `vimrc`.
