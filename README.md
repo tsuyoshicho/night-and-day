@@ -15,28 +15,24 @@ Some folks like to flip between a light theme during the day and a dark theme at
 
 ## installation
 
-Vim plugins can be managed with [Vundle](https://github.com/VundleVim/Vundle.vim), which can be installed by running the following command in a terminal:
+Vim plugins can be managed with [vim-plug](https://github.com/junegunn/vim-plug), which can be installed by running the following command in a terminal:
 
 ~~~
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ~~~
 
 Next, add the following to the top of `vimrc`:
 
 ~~~
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'nightsense/night-and-day'
-Plugin 'xolox/vim-colorscheme-switcher'
-Plugin 'xolox/vim-misc'
-call vundle#end()
-filetype plugin indent on
+call plug#begin('~/.vim/plugged')
+Plug 'nightsense/night-and-day'
+Plug 'xolox/vim-colorscheme-switcher'
+Plug 'xolox/vim-misc'
+call plug#end()
 ~~~
 
-Then, within Vim, run `VundleUpdate`.
+Then, within Vim, run `PlugUpdate`.
 
 ## configuration
 
