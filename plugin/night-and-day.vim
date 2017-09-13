@@ -5,7 +5,7 @@ let s:current_theme = ''
 let s:current_back = ''
 
 " get lists from vimrc
-let g:nd_themelist = get(g:, 'nd_themelist')   " theme names
+let g:nd_themename = get(g:, 'nd_themename')   " theme names
 let g:nd_themetime = get(g:, 'nd_themetime')   " theme start times
 let g:nd_themeback = get(g:, 'nd_themeback')   " theme background states
 
@@ -54,14 +54,14 @@ function! ThemeCheck(timer)
 
   " if start-time of first theme is later than current time, select last theme
   if s:time < s:themetime[0]
-    call ThemeSwitch(g:nd_themelist[-1])
+    call ThemeSwitch(g:nd_themename[-1])
     call BackgroundSwitch(g:nd_themeback[-1])
 
   else
     " otherwise, select theme with latest start-time before current time
-    for i in range(0,len(g:nd_themelist)-1)
+    for i in range(0,len(g:nd_themename)-1)
       if s:time + 1 > s:themetime[i] && s:time < s:themetime[i+1]
-        call ThemeSwitch(g:nd_themelist[i])
+        call ThemeSwitch(g:nd_themename[i])
         call BackgroundSwitch(g:nd_themeback[i])
       endif
     endfor
