@@ -33,49 +33,13 @@ g:nd_themelist | the **name** of each theme (as used by the vim command `colorsc
 g:nd_themetime | the **starting time** for each theme (that is, the time you want the corresponding theme to become active) in `HH:MM` 24-hour format (you can drop the leading zero on single-digit hours)
 g:nd_themeback | the **background state** for each theme, which is either `light` or `dark`; the former is the default setting, and is expected by many themes that don't feature background toggling
 
-An example configuration:
+This example configuration reflects the schedule illustrated on the world map above:
 
 ```
-let g:nd_themelist = ["solarized", "base16-default-light", "base16-default-dark", "solarized"]
-let g:nd_themetime = ["8:00", "12:00", "17:00", "22:00"]
-let g:nd_themeback = ["light", "light", "light", "dark"]
+let g:nd_themelist = ["base16-default-light", "solarized", "solarized"]
+let g:nd_themetime = ["4:00", "11:00", "18:00"]
+let g:nd_themeback = ["light", "light", "dark"]
 ```
-
-<table>
-<tr>
-<td> 0:00 -  1:00</td>
-<td> 1:00 -  2:00</td>
-<td> 2:00 -  3:00</td>
-<td> 3:00 -  4:00</td>
-<td> 4:00 -  5:00</td>
-<td> 5:00 -  6:00</td>
-<td> 6:00 -  7:00</td>
-<td> 7:00 -  8:00</td>
-<td> 8:00 -  9:00</td>
-<td> 9:00 - 10:00</td>
-<td>10:00 - 11:00</td>
-<td>11:00 - 12:00</td>
-<td>12:00 - 13:00</td>
-<td>13:00 - 14:00</td>
-<td>14:00 - 15:00</td>
-<td>15:00 - 16:00</td>
-<td>16:00 - 17:00</td>
-<td>17:00 - 18:00</td>
-<td>18:00 - 19:00</td>
-<td>19:00 - 20:00</td>
-<td>20:00 - 21:00</td>
-<td>21:00 - 22:00</td>
-<td>22:00 - 23:00</td>
-<td>23:00 - 24:00</td>
-</tr>
-<tr>
-<td colspan='8'>■■■ solarized ■■■<br>dark background</td>
-<td colspan='4'>◦◦◦ base16-default-light ◦◦◦<br>light background\*</td>
-<td colspan='5'>••• base16-default-dark •••<br>light background\*</td>
-<td colspan='2'>□□□ solarized □□□<br>light background</td>
-<td colspan='8'>■■■</td>
-</tr>
-</table>
 
 ## notes
 
