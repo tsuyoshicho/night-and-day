@@ -1,46 +1,83 @@
-" get variables
-let g:nd_day_theme      = get(g:, 'nd_day_theme', 'default')
-let g:nd_day_bgdark     = get(g:, 'nd_day_bgdark', 0)
-let g:nd_night_theme    = get(g:, 'nd_night_theme', 'default')
-let g:nd_night_bgdark   = get(g:, 'nd_night_bgdark', 0)
-let g:nd_dawn_time      = get(g:, 'nd_dawn_time', 8)
-let g:nd_dusk_time      = get(g:, 'nd_dusk_time', 20)
-let g:nd_current_theme  = ''
-let g:nd_current_bgdark = ''
+""" SET UP VARIABLES
 
-" theme switching function
-function! Nightday()
-  if strftime("%H") < g:nd_dawn_time || strftime("%H") + 1 > g:nd_dusk_time
-    if g:nd_current_bgdark != g:nd_night_bgdark
-      if g:nd_night_bgdark == 1
-        exec 'set background=dark'
-        let g:nd_current_bgdark = 1
-      else
-        exec 'set background=light'
-        let g:nd_current_bgdark = 0
-      endif
-    endif
-    if g:nd_current_theme != g:nd_night_theme
-      call xolox#colorscheme_switcher#switch_to(g:nd_night_theme)
-      let g:nd_current_theme = g:nd_night_theme
-    endif
-  else
-    if g:nd_current_bgdark != g:nd_day_bgdark
-      if g:nd_day_bgdark == 1
-        exec 'set background=dark'
-        let g:nd_current_bgdark = 1
-      else
-        exec 'set background=light'
-        let g:nd_current_bgdark = 0
-      endif
-    endif
-    if g:nd_current_theme != g:nd_day_theme
-      call xolox#colorscheme_switcher#switch_to(g:nd_day_theme)
-      let g:nd_current_theme = g:nd_day_theme
+" initialize variables for current theme and background state
+let s:current_theme = ''
+let s:current_back = ''
+
+" get lists from vimrc
+let g:nd_themelist = get(g:, 'nd_themelist')   " theme names
+let g:nd_themetime = get(g:, 'nd_themetime')   " theme start times
+let g:nd_themeback = get(g:, 'nd_themeback')   " theme background states
+
+" convert 24-hour time format to minutes-after-midnight
+let s:themetime = []
+for i in range(0,len(g:nd_themetime)-1)
+  let s:minutes = split (g:nd_themetime[i], ':')[0] * 60 +
+        \ split (g:nd_themetime[i], ':')[1]
+  call add(s:themetime, s:minutes)
+endfor
+
+" append 'end-of-day time' (helps simplify the check function)
+call add(s:themetime, 1440)
+
+
+""" DEFINE SWITCH FUNCTIONS (for switching theme/background if necessary)
+
+" switch to scheduled theme if not already active
+function! ThemeSwitch(proposed_theme)
+  if a:proposed_theme != s:current_theme
+    call xolox#colorscheme_switcher#switch_to(a:proposed_theme)
+    let s:current_theme = a:proposed_theme
+  endif
+endfunction
+
+" switch to scheduled background state if not already active
+function! BackgroundSwitch(proposed_back)
+  if a:proposed_back != s:current_back
+    if a:proposed_back == 'dark'
+      exec 'set background=dark'
+      let s:current_back = 'dark'
+    else
+      exec 'set background=light'
+      let s:current_back = 'light'
     endif
   endif
 endfunction
 
-" call theme switching function
-call Nightday()
-autocmd CursorHold * call Nightday()
+
+""" DEFINE CHECK FUNCTION (for detecting which theme/bg state should be active)
+
+function! ThemeCheck(timer)
+
+  " get current time (in minutes-after-midnight)
+  let s:time = strftime ("%H") * 60 + strftime ("%M")
+
+  " if start-time of first theme is later than current time, select last theme
+  if s:time < s:themetime[0]
+    call ThemeSwitch(g:nd_themelist[-1])
+    call BackgroundSwitch(g:nd_themeback[-1])
+
+  else
+    " otherwise, select theme with latest start-time before current time
+    for i in range(0,len(g:nd_themelist)-1)
+      if s:time + 1 > s:themetime[i] && s:time < s:themetime[i+1]
+        call ThemeSwitch(g:nd_themelist[i])
+        call BackgroundSwitch(g:nd_themeback[i])
+      endif
+    endfor
+  endif
+
+endfunction
+
+
+""" RUN PLUGIN
+
+" run immediately
+call ThemeCheck('')
+
+" run continuously
+if has ('atimers')
+  call timer_start(1000, 'ThemeCheck', {'repeat': -1})
+else
+  autocmd CursorHold * call ThemeCheck('')
+endif
