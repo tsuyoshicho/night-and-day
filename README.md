@@ -1,8 +1,8 @@
 # night-and-day
 
-A vim theme scheduler. Divide your day into as many intervals as you like, assigning each interval it's own theme.
+A **vim theme scheduler**. Divide your day into as many intervals as you like, assigning each interval it's own theme.
 
-<img src="map.jpg">
+![](map.jpg)
 
 ## installation
 
