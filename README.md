@@ -2,7 +2,7 @@
 
 A vim theme scheduler. Divide your day into as many intervals as you like, assigning each interval it's own theme.
 
-<img src="image.jpg" width="500">
+<img src="map.jpg">
 
 ## installation
 
@@ -82,3 +82,5 @@ let g:nd_themeback = ["light", "light", "light", "dark"]
 This plugin incorporates the [vim-colorscheme-switcher](https://github.com/xolox/vim-colorscheme-switcher) by xolox.
 
 Photo by [Neil Tackaberry](https://www.flickr.com/photos/23629083@N03/6904426431), licensed [CC BY-ND 2.0](https://creativecommons.org/licenses/by-nd/2.0/).
+
+Map courtesy of [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Daylight_Map,_nonscientific_(0900_UTC).jpg).
