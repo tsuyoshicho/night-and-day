@@ -13,7 +13,7 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ~~~
 
-To **install night-and-day**, add the following to the top of `vimrc`:
+To **install night-and-day** via vim-plug, add the following to the top of your `vimrc`:
 
 ~~~
 call plug#begin('~/.vim/plugged')
@@ -25,21 +25,29 @@ Then, within vim, run `PlugUpdate`.
 
 ## configuration
 
-You'll need to add **three lines** to `vimrc`. Each line defines a list, and each list must contain the same number of items.
-
-list           | description
-:-------------:|:----------:
-g:nd_themelist | the **name** of each theme (as used by the vim command `colorscheme`); list them in chronological order, starting from midnight
-g:nd_themetime | the **starting time** for each theme (that is, the time you want the corresponding theme to become active) in `HH:MM` 24-hour format (you can drop the leading zero on single-digit hours)
-g:nd_themeback | the **background state** for each theme, which is either `light` or `dark`; the former is the default setting, and is expected by many themes that don't feature background toggling
-
-This example configuration reflects the schedule illustrated on the world map above:
+You'll need to add **three lines** of configuration to `vimrc`. Like so:
 
 ```
-let g:nd_themelist = ["base16-default-light", "solarized", "solarized"]
+let g:nd_themename = ["base16-default-light", "solarized", "solarized"]
 let g:nd_themetime = ["4:00", "11:00", "18:00"]
 let g:nd_themeback = ["light", "light", "dark"]
 ```
+
+setting        | description
+:-------------:|:----------:
+g:nd_themename | the **name** of each theme (as used by the vim command `colorscheme`)
+g:nd_themetime | the **starting time** for each theme (in `H:MM`/`HH:MM` format)
+g:nd_themeback | the **background state** for each theme (either `light` or `dark`)
+
+> `light` is the default background state in vim, and is expected by many themes that don't feature background toggling.
+
+So for each theme interval you want to define, you'll need one entry on each line. Be sure they align, and arrange them in chronological order (starting from midnight).
+
+The above sample configuration, which reflects the world map image at the top of this readme, will activate:
+
+- `base16-default-light` 4-11AM
+- `solarized` (light background) 11AM-6PM
+- `solarized` (dark background) 6PM-4AM
 
 ## notes
 
