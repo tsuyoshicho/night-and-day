@@ -34,7 +34,7 @@ let g:nd_themeback = ["light", "light", "dark"]
 ```
 
 setting          | description
-:---------------:|:----------:
+:----------------|:-----------
 `g:nd_themename` | the **name** of each theme (as used by the vim command `colorscheme`)
 `g:nd_themetime` | the **starting time** for each theme in `H:MM`/`HH:MM` format (valid range: `0:00`-`23:59`)
 `g:nd_themeback` | the **background state** for each theme (either `light` or `dark`)
