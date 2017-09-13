@@ -25,7 +25,7 @@ Then, within vim, run `PlugUpdate`.
 
 ## configuration
 
-You'll need to add **three lines of configuration**to `vimrc`. Like so:
+You'll need to add **three lines of configuration** to `vimrc`. Like so:
 
 ```
 let g:nd_themename = ["base16-default-light", "solarized", "solarized"]
