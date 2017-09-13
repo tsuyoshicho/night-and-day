@@ -17,8 +17,8 @@ for i in range(0,len(g:nd_themetime)-1)
   call add(s:themetime, s:minutes)
 endfor
 
-" append 'end-of-day time' (helps simplify the check function)
-call add(s:themetime, 1440)
+" append 'minute past end-of-day' time (helps simplify the check function)
+call add(s:themetime, 1441)
 
 
 """ DEFINE SWITCH FUNCTIONS (for switching theme/background if necessary)
@@ -52,13 +52,6 @@ function! ThemeCheck(timer)
   " get current time (in minutes-after-midnight)
   let s:time = strftime ("%H") * 60 + strftime ("%M")
 
-  " get time plus one minute, wrapping around to 0 (midnight) if necessary
-  if s:time == 1439
-    let s:timeplus = 0
-  else
-    let s:timeplus = s:time + 1
-  endif
-
   " if start-time of first theme is later than current time, select last theme
   if s:time < s:themetime[0]
     call ThemeSwitch(g:nd_themename[-1])
@@ -67,7 +60,7 @@ function! ThemeCheck(timer)
   else
     " otherwise, select theme with latest start-time before current time
     for i in range(0,len(g:nd_themename)-1)
-      if s:timeplus > s:themetime[i] && s:time < s:themetime[i+1]
+      if s:time + 1 > s:themetime[i] && s:time < s:themetime[i+1]
         call ThemeSwitch(g:nd_themename[i])
         call BackgroundSwitch(g:nd_themeback[i])
       endif
