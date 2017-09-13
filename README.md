@@ -6,7 +6,7 @@ A **vim theme scheduler**. Divide your day into as many intervals as you like, a
 
 ## installation
 
-If you don't already have a preferred plugin management system, consider trying [vim-plug](https://github.com/junegunn/vim-plug). Install with:
+If you don't already have a preferred plugin management system, consider trying [vim-plug](https://github.com/junegunn/vim-plug), which can be installed with:
 
 ~~~
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
