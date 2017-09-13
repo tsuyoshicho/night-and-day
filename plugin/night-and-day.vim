@@ -76,7 +76,7 @@ endfunction
 call ThemeCheck('')
 
 " run continuously
-if has ('atimers')
+if has ('timers')
   call timer_start(1000, 'ThemeCheck', {'repeat': -1})
 else
   autocmd CursorHold * call ThemeCheck('')
