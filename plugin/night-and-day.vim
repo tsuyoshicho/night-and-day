@@ -17,8 +17,8 @@ for i in range(0,len(g:nd_themetime)-1)
   call add(s:themetime, s:minutes)
 endfor
 
-" append 'minute past end-of-day' time (helps simplify the check function)
-call add(s:themetime, 1441)
+" append 'end-of-day time' (helps simplify the check function)
+call add(s:themetime, 1440)
 
 
 """ DEFINE SWITCH FUNCTIONS (for switching theme/background if necessary)
