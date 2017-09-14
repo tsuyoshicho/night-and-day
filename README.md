@@ -1,6 +1,6 @@
 # night-and-day
 
-A **vim theme scheduler**. Divide your day into as many intervals as you like, assigning each interval it's own theme.
+A **vim theme scheduler**. Divide your day into as many intervals as you like, assigning each interval its own theme.
 
 ![](map.jpg)
 
