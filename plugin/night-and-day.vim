@@ -4,16 +4,14 @@
 let s:current_theme = ''
 let s:current_back = ''
 
-" get lists from vimrc
-let g:nd_themename = get(g:, 'nd_themename')   " theme names
-let g:nd_themetime = get(g:, 'nd_themetime')   " theme start times
-let g:nd_themeback = get(g:, 'nd_themeback')   " theme background states
+" get vimrc config
+let g:nd_themes = get(g:, 'nd_themes')
 
-" convert 24-hour time format to minutes-after-midnight
+" convert time to minutes-after-midnight
 let s:themetime = []
-for i in range(0,len(g:nd_themetime)-1)
-  let s:minutes = split (g:nd_themetime[i], ':')[0] * 60 +
-        \ split (g:nd_themetime[i], ':')[1]
+for i in range(0,len(g:nd_themes)-1)
+  let s:minutes = split (g:nd_themes[i][0], ':')[0] * 60 +
+        \ split (g:nd_themes[i][0], ':')[1]
   call add(s:themetime, s:minutes)
 endfor
 
@@ -50,19 +48,19 @@ endfunction
 function! ThemeCheck(timer)
 
   " get current time (in minutes-after-midnight)
-  let s:time = strftime ("%H") * 60 + strftime ("%M")
+  let s:timenow = strftime ("%H") * 60 + strftime ("%M")
 
   " if start-time of first theme is later than current time, select last theme
-  if s:time < s:themetime[0]
-    call ThemeSwitch(g:nd_themename[-1])
-    call BackgroundSwitch(g:nd_themeback[-1])
+  if s:timenow < s:themetime[0]
+    call ThemeSwitch(g:nd_themes[-1][1])
+    call BackgroundSwitch(g:nd_themes[-1][2])
 
   else
     " otherwise, select theme with latest start-time before current time
-    for i in range(0,len(g:nd_themename)-1)
-      if s:time + 1 > s:themetime[i] && s:time < s:themetime[i+1]
-        call ThemeSwitch(g:nd_themename[i])
-        call BackgroundSwitch(g:nd_themeback[i])
+    for i in range(0,len(g:nd_themes)-1)
+      if s:timenow + 1 > s:themetime[i] && s:timenow < s:themetime[i+1]
+        call ThemeSwitch(g:nd_themes[i][1])
+        call BackgroundSwitch(g:nd_themes[i][2])
       endif
     endfor
   endif

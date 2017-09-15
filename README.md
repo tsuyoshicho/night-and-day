@@ -25,21 +25,21 @@ Then, within vim, run `PlugUpdate`.
 
 ## configuration
 
-You'll need to add **three lines of configuration** to `vimrc`. Like so:
+You'll need to add a "nested list" containing your settings to your `vimrc`. Like so:
 
 ```
-let g:nd_themename = ["base16-default-light", "solarized", "solarized"]
-let g:nd_themetime = ["4:00", "11:00", "18:00"]
-let g:nd_themeback = ["light", "light", "dark"]
+let g:nd_themes = [
+  \ ["4:00",  "base16-default-light", "light" ],
+  \ ["11:00", "solarized",            "light"],
+  \ ["18:00", "solarized",            "dark"],
+  \ ]
 ```
 
-setting          | description
-:----------------|:-----------
-`g:nd_themename` | the **name** of each theme (as used by the vim command `colorscheme`)
-`g:nd_themetime` | the **starting time** for each theme in `H:MM`/`HH:MM` format (valid range: `0:00`-`23:59`)
-`g:nd_themeback` | the **background state** for each theme (either `light` or `dark`)
+- column 1: the **starting time** for each theme in `H:MM`/`HH:MM` format (valid range: `0:00`-`23:59`)
+- column 2: the **name** of each theme (as used by the vim command `colorscheme`)
+- column 3: the **background state** for each theme (either `light` or `dark`)
 
-> `light` is the default background state in vim, and is expected by many themes that don't feature background toggling.
+> `light` is the default background state in vim, and is expected by some themes that don't feature background toggling.
 
 So for each theme interval you want to define, you'll need one entry on each line. Be sure they align, and arrange them in chronological order (starting from midnight).
 
