@@ -30,8 +30,8 @@ You'll need to add a "nested list" containing your settings to your `vimrc`. Lik
 ```
 let g:nd_themes = [
   \ ["4:00",  "base16-default-light", "light" ],
-  \ ["11:00", "solarized",            "light"],
-  \ ["18:00", "solarized",            "dark"],
+  \ ["11:00", "solarized",            "light" ],
+  \ ["18:00", "solarized",            "dark"  ],
   \ ]
 ```
 
