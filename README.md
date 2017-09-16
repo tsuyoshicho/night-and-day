@@ -36,7 +36,7 @@ let g:nd_themes = [
 ```
 
 - column 1: the **starting time** for each theme in `H:MM`/`HH:MM` format (valid range: `0:00`-`23:59`)
-  - arrange your list in chronological order, starting from midnight
+  - arrange your list in chronological order, starting from midnight (otherwise an alert will be triggered)
 - column 2: the **name** of each theme (as used by the vim command `colorscheme`)
 - column 3: the **background state** for each theme (either `light` or `dark`)
 
