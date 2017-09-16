@@ -109,6 +109,6 @@ Next, get today's exact sunrise/sunset times via an online search. (With somethi
 
 This plugin incorporates the [vim-colorscheme-switcher](https://github.com/xolox/vim-colorscheme-switcher) by xolox.
 
-Map courtesy of [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Daylight_Map,_nonscientific_(0900_UTC).jpg).
+Map image courtesy of [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Daylight_Map,_nonscientific_(0900_UTC).jpg).
 
 The Sunrise/sunset timetables were obtained from the ["year" spreadsheet](https://www.esrl.noaa.gov/gmd/grad/solcalc/calcdetails.html) provided by the US National Oceanic & Atmospheric Administration.
