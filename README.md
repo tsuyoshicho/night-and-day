@@ -97,11 +97,13 @@ Next, get today's exact sunrise/sunset times via an online search. (With somethi
 
 > If your region features daylight saving time (DST) for part of the year, you can take care of the adjustment automatically by wrapping `g:nd_timeshift` in an "if statement". For instance, to activate DST for March through September:
 >
+> ```
 > if strftime("%m") > 2 && strftime("%m") < 10
 >   let g:nd_timeshift = '60'
 > else
 >   let g:nd_timeshift = '0'
 > endif
+> ```
 
 ## notes
 
