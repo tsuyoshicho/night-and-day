@@ -78,7 +78,7 @@ north temperate | `30` `40` `45` `50` `55` `57.5` `60` `62.5` `65`
 tropics         | `-20` `-10` `0` `10` `20`
 south temperate | `-65` `-62.5` `-60` `-57.5` `-55` `-50` `-45` `-40` `-30`
 
-The second additional variable, `g:nd_timeshift`, is **optional**, though appropriate for most users. This variable specifies an offset (in minutes) for sunrise/sunset times to be shifted. An offset is necessary to account for one's longitudinal position within a timezone, as well as daylight saving time (if applicable).
+The second additional variable, `g:nd_timeshift`, is **optional**, though appropriate for most users. This variable specifies an offset (in minutes, positive or negative) for sunrise/sunset times to be shifted. An offset is necessary to account for one's longitudinal position within a timezone, as well as daylight saving time (if applicable).
 
 The simplest way to determine the appropriate value for `g:nd_timeshift` is to start vim with the following configuration:
 
