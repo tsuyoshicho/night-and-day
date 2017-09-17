@@ -29,14 +29,14 @@ You'll need to add a "nested list" containing your settings to `vimrc`. Like so:
 
 ```
 let g:nd_themes = [
-  \ ["4:00",  "base16-default-light", "light" ],
-  \ ["11:00", "solarized",            "light" ],
-  \ ["18:00", "solarized",            "dark"  ],
+  \ ['4:00',  'base16-default-light', 'light' ],
+  \ ['11:00', 'solarized',            'light' ],
+  \ ['18:00', 'solarized',            'dark'  ],
   \ ]
 ```
 
 - column 1: the **starting time** for each theme in `H:MM`/`HH:MM` format (valid range: `0:00`-`23:59`)
-  - arrange your list in chronological order, starting from midnight (otherwise an alert will be triggered)
+  - arrange your list in chronological order
 - column 2: the **name** of each theme (as used by the vim command `colorscheme`)
 - column 3: the **background state** for each theme (either `light` or `dark`)
 
@@ -54,23 +54,29 @@ In addition to absolute times, you can set times **relative to sunrise/sunset**.
 
 ```
 let g:nd_themes = [
-  \ ["sunrise-3:00", "base16-default-light", "light" ],
-  \ ["11:00",        "solarized",            "light" ],
-  \ ["sunset+0:00",  "solarized",            "dark"  ],
+  \ ['sunrise+0', 'base16-default-light', 'light' ],
+  \ ['sunrise+1/2',        'solarized',            'light' ],
+  \ ['sunset+0',  'solarized',            'dark'  ],
   \ ]
 let g:nd_latitude = '50'
 let g:nd_timeshift = '74'
 ```
 
+Times are specified with the prefix `sunrise+` or `sunset+`, followed by a number. The number must be either zero or a fraction.
+
+`sunrise+0` denotes the time at which sunrise occurs. The plus sign refers to the period of daylight between sunrise and sunset. Thus, `sunrise+1/2` denotes the time halfway through the daylight period (solar noon).
+
+`sunset+0` denotes the time at which sunset occurs. The minus sign refers to the period of darkness between sunset and sunrise. Thus, `sunset+1/2` denotes the time halfway through the darkness period (solar midnight).
+
 The above sample configuration will activate:
 
-- `base16-default-light` from 3 hours before sunrise to 11AM
-- `solarized` (light background) from 11AM until sunset
-- `solarized` (dark background) from sunset to 3 hours before sunrise
+- `base16-default-light` from sunrise to halfway through the day (solar noon)
+- `solarized` (light background) from solar noon until sunset
+- `solarized` (dark background) from sunset to sunrise
 
-Thus, for sun-relative times, the **time format** remains the same; simply add one of the four relative prefixes (`sunrise+`, `sunrise-`, `sunset+`, `sunset-`).
+The above configuration also features two new variables. The first, `g:nd_latitude`, is **mandatory** when using any sun-relative times in your schedule. Indeed, it is the presence of `g:nd_latitude` that relative-time mode, so be sure to remove it if switching back to absolute time.
 
-The above configuration also features two new variables. The first, `g:nd_latitude`, is **mandatory** when using any sun-relative times in your schedule. There are 23 permitted values; choose the one nearest your current latitude.
+There are 23 permitted values; choose the one nearest your current latitude.
 
 region          | permitted values for `g:nd_latitude`
 :--------------:|:-----------------------------------:
@@ -84,24 +90,26 @@ The simplest way to determine the appropriate value for `g:nd_timeshift` is to s
 
 ```
 let g:nd_themes = [
-  \ ["sunrise+0:00", "default", "light" ],
-  \ ["sunset+0:00",  "default", "light" ],
+  \ ['sunrise+0', 'default', 'light' ],
+  \ ['sunset+0',  'default', 'light' ],
   \ ]
 let g:nd_latitude = 'LL'
 let g:nd_timeshift = '0'
 ```
 
-...where `LL` is the value closest to your current latitude. Then, from the vim command line, run `:call NdSchedule()`. This will print your theme schedule, allowing you to view the precise times being used for sunrise and sunset.
+...where `LL` is the value closest to your current latitude. Then, from the vim command line, run `:call NdSchedule()`. This will print your theme schedule, including the precise times being used for sun-relative timings.
 
 Next, get today's exact sunrise/sunset times via an online search. (With something like "[YOUR LOCATION] sunrise sunset", Google will likely give you the information in one of those answer boxes.) Finally, set `nd_timeshift` to the appropriate value to achieve accurate sunrise/sunset times. Relaunch vim and run `:call NdSchedule()` again to confirm the offset.
+
+Note that it shouldn't be necessary for `g:nd_timeshift` to exceed a few hours in magnitude. Set it too high and the plugin will malfunction.
 
 > If your region features daylight saving time (DST) for part of the year, you can take care of the adjustment automatically by wrapping `g:nd_timeshift` in an "if statement". For instance, to activate DST for March through September:
 >
 > ```
 > if strftime("%m") > 2 && strftime("%m") < 10
->   let g:nd_timeshift = '60'
+>   let g:nd_timeshift = '67'
 > else
->   let g:nd_timeshift = '0'
+>   let g:nd_timeshift = '7'
 > endif
 > ```
 

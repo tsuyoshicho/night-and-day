@@ -1,13 +1,101 @@
-""" SET UP VARIABLES
+""" PRELIMINARIES
+
+" check if g:nd_themes is defined
+if !exists('g:nd_themes')
+  echomsg "NIGHT-AND-DAY PLUGIN - USER CONFIGURATION ERROR"
+  echomsg "g:nd_themes must be added to vimrc to define a theme schedule."
+  finish
+endif
 
 " initialize variables for current theme and background state
 let s:current_theme = ''
 let s:current_back = ''
 
-" initialize sun data if needed
+" check latitude/time format in vimrc, initialize sun data if needed
 if exists('g:nd_latitude')
+
+  if !matchstr(g:nd_latitude, '^-65$\|^-62.5$\|^-60$\|^-57.5$\|^-55$\|^-50$\|
+        \ ^-45$\|^-40$\|^-30$\|^-20$\|^-10$\|^0$\|^10$\|^20$\|^30$\|^40$\|
+        \ ^45$\|^50$\|^55$\|^57.5$\|^60$\|^62.5$\|^65$')
+    echomsg "NIGHT-AND-DAY PLUGIN - USER CONFIGURATION ERROR"
+    echomsg "g:nd_latitude (in vimrc) is not set to one of these values:"
+    echomsg " "
+    echomsg "[north temperate] 30 40 45 50 55 57.5 60 62.5 65"
+    echomsg "[tropics] -20 -10 0 10 20"
+    echomsg "[south temperate] -65 -62.5 -60 -57.5 -55 -50 -45 -40 -30"
+    finish
+  endif
+
+  for i in range(0,len(g:nd_themes)-1)
+    if matchstr(g:nd_themes[i][0], '^sunrise+0$') == ''
+          \ && matchstr(g:nd_themes[i][0], '^sunrise+[0-9]*/[0-9]*$') == ''
+          \ && matchstr(g:nd_themes[i][0], '^sunset+0$') == ''
+          \ && matchstr(g:nd_themes[i][0], '^sunset+[0-9]*/[0-9]*$') == ''
+      echomsg "NIGHT-AND-DAY PLUGIN - USER CONFIGURATION ERROR"
+      echomsg "Theme start times are not provided (in vimrc) in 'sun-relative"
+      echomsg "time mode' format (sunrise+N/N, sunset+N/N)."
+      echomsg " "
+      echomsg "('Sun-relative time mode' is active because variable"
+      echomsg " g:nd_latitude is set. Either fix the time format or switch to"
+      echomsg "'absolute time mode' by removing g:nd_latitude from vimrc.)"
+      finish
+    endif
+  endfor
+
+  for i in range(0,len(g:nd_themes)-1)
+    if split (g:nd_themes[i][0], '+')[1] != 0
+      if split(split (g:nd_themes[i][0], '+')[1], '/')[0] /
+            \ split(split (g:nd_themes[i][0], '+')[1], '/')[1] >= 1
+        echomsg "NIGHT-AND-DAY PLUGIN - USER CONFIGURATION ERROR"
+        echomsg "At least one theme start time has too large an offset from"
+        echomsg "sunrise/sunset (offset size must be less than 1)."
+        finish
+      endif
+    endif
+  endfor
+
   call sun#NdSundata()
+
+else
+  for i in range(0,len(g:nd_themes)-1)
+    if matchstr(g:nd_themes[i][0], '^[0-9].:[0-9].$') == ''
+          \ && matchstr(g:nd_themes[i][0], '^[0-9]:[0-9].$') == ''
+      echomsg "NIGHT-AND-DAY PLUGIN - USER CONFIGURATION ERROR"
+      echomsg "Theme start times are not provided (in vimrc) in 'absolute time"
+      echomsg "mode' format (H:MM/HH:MM)."
+      echomsg " "
+      echomsg "('Absolute time mode' is active because variable g:nd_latitude"
+      echomsg "is not set. Either fix the time format or switch to"
+      echomsg "'sun-relative time mode' by adding g:nd_latitude to vimrc.)"
+      finish
+    endif
+  endfor
+
+  for i in range(0,len(g:nd_themes)-1)
+    if split (g:nd_themes[i][0], ':')[0] > 23
+          \ || split (g:nd_themes[i][0], ':')[1] > 59
+        echomsg "NIGHT-AND-DAY PLUGIN - USER CONFIGURATION ERROR"
+        echomsg "At least one theme start time has too large a value for"
+        echomsg "hours (max value: 23) or minutes (max value: 59)."
+        finish
+    endif
+  endfor
+
 endif
+
+if exists('g:nd_timeshift')
+  if matchstr(g:nd_timeshift, '^-[0-9]*$\|^[0-9]*$') == ''
+    echomsg "NIGHT-AND-DAY PLUGIN - USER CONFIGURATION ERROR"
+    echomsg "g:nd_timeshift (in vimrc) must be an integer."
+    finish
+  endif
+  if g:nd_timeshift < -1439 || g:nd_timeshift > 1439
+    echomsg "NIGHT-AND-DAY PLUGIN - USER CONFIGURATION ERROR"
+    echomsg "g:nd_timeshift (in vimrc) is too large (maximum magnitude: 1439)."
+    finish
+  endif
+endif
+
 
 
 """ PREPARE THEME TIMING
@@ -16,25 +104,28 @@ endif
 let s:themetime = []
 for i in range(0,len(g:nd_themes)-1)
 
-  if g:nd_themes[i][0] =~ 'sun'
+  if exists('g:nd_latitude')
 
-    if g:nd_themes[i][0] =~ '+'
-      let s:minutes = split (split (g:nd_themes[i][0], ':')[0], '+')[1] * 60 +
-            \ split (g:nd_themes[i][0], ':')[1]
-      if split (split (g:nd_themes[i][0], ':')[0], '+')[0] == 'sunrise'
-        let s:minutes = g:nd_sunrise_minutes + s:minutes
-      elseif split (split (g:nd_themes[i][0], ':')[0], '+')[0] == 'sunset'
-        let s:minutes = g:nd_sunset_minutes + s:minutes
+    if split (g:nd_themes[i][0], '+')[0] == 'sunrise'
+      if split (g:nd_themes[i][0], '+')[1] == 0
+        let s:minutes = g:nd_sunrise_minutes
+      else
+        let s:minutes = g:nd_sunrise_minutes + g:nd_daylength /
+              \ split(split (g:nd_themes[i][0], '+')[1], '/')[1] *
+              \ split(split (g:nd_themes[i][0], '+')[1], '/')[0]
       endif
+    elseif split (g:nd_themes[i][0], '+')[0] == 'sunset'
+      if split (g:nd_themes[i][0], '+')[1] == 0
+        let s:minutes = g:nd_sunset_minutes
+      else
+        let s:minutes = g:nd_sunset_minutes + g:nd_nightlength /
+              \ split(split (g:nd_themes[i][0], '+')[1], '/')[1] *
+              \ split(split (g:nd_themes[i][0], '+')[1], '/')[0]
+      endif
+    endif
 
-    elseif g:nd_themes[i][0] =~ '-'
-      let s:minutes = split (split (g:nd_themes[i][0], ':')[0], '-')[1] * 60 +
-            \ split (g:nd_themes[i][0], ':')[1]
-      if split (split (g:nd_themes[i][0], ':')[0], '-')[0] == 'sunrise'
-        let s:minutes = g:nd_sunrise_minutes - s:minutes
-      elseif split (split (g:nd_themes[i][0], ':')[0], '-')[0] == 'sunset'
-        let s:minutes = g:nd_sunset_minutes - s:minutes
-      endif
+    if s:minutes > 1439
+      let s:minutes = s:minutes - 1440
     endif
 
   else
@@ -44,6 +135,20 @@ for i in range(0,len(g:nd_themes)-1)
 
   call add(s:themetime, s:minutes)
 endfor
+
+" cycle theme list if necessary
+while s:themetime[-1] < s:themetime[0]
+  let g:nd_themes_temp = []
+  let s:themetime_temp = []
+  call add(g:nd_themes_temp, g:nd_themes[-1])
+  call add(s:themetime_temp, s:themetime[-1])
+  for i in range(0,len(g:nd_themes)-2)
+    call add(g:nd_themes_temp, g:nd_themes[i])
+    call add(s:themetime_temp, s:themetime[i])
+  endfor
+  let g:nd_themes = g:nd_themes_temp
+  let s:themetime = s:themetime_temp
+endwhile
 
 " append 'end-of-day time'
 call add(s:themetime, 1440)
@@ -67,12 +172,14 @@ function! NdSchedule()
   1
 endfunction
 
+
 " check if themes are in consecutive order
 for i in range(0,len(g:nd_themes)-1)
   if s:themetime[i] >= s:themetime[i+1]
-    echomsg "warning: night-and-day themes not scheduled in consecutive order"
-    echomsg "(your current theme schedule will now be displayed)"
+    echomsg "NIGHT-AND-DAY PLUGIN - USER CONFIGURATION ERROR"
+    echomsg "Theme times (in g:nd_themes) are not in consecutive order."
     call NdSchedule()
+    finish
   endif
 endfor
 
