@@ -27,7 +27,7 @@ Then, within vim, run `PlugUpdate`.
 
 ## configuration
 
-You'll need to add a "nested list" containing your settings to `vimrc`. Like so:
+Add a "nested list" containing your settings to `vimrc`, like so:
 
 ```
 let g:nd_themes = [
@@ -37,7 +37,7 @@ let g:nd_themes = [
   \ ]
 ```
 
-- column 1: the **starting time** for each theme in `H:MM`/`HH:MM` format (valid range: `0:00`-`23:59`)
+- column 1: the **start time** for each theme in `H:MM`/`HH:MM` format (valid range: `0:00`-`23:59`)
   - arrange your list in chronological order
 - column 2: the **name** of each theme (as used by the vim command `colorscheme`)
 - column 3: the **background state** for each theme (either `light` or `dark`)
@@ -56,29 +56,29 @@ In addition to absolute times, you can set times **relative to sunrise/sunset**.
 
 ```
 let g:nd_themes = [
-  \ ['sunrise+0', 'base16-default-light', 'light' ],
-  \ ['sunrise+1/2',        'solarized',            'light' ],
-  \ ['sunset+0',  'solarized',            'dark'  ],
+  \ ['sunrise+0',   'base16-default-light', 'light' ],
+  \ ['sunrise+1/2', 'solarized',            'light' ],
+  \ ['sunset+0',    'solarized',            'dark'  ],
   \ ]
 let g:nd_latitude = '50'
 let g:nd_timeshift = '74'
 ```
 
-Times are specified with the prefix `sunrise+` or `sunset+`, followed by a number. The number must be either zero or a fraction.
+- sun-relative times are specified with the prefix `sunrise+` or `sunset+`
+- the `+` refers to the period following the solar event in question: the **daylight period** after sunrise, the **darkness period** after sunset
+- the number after `+`, which must be either 0 or a fraction with value less than 1, denotes how far the start time should be extended into the following period
 
-`sunrise+0` denotes the time at which sunrise occurs. The plus sign refers to the period of daylight between sunrise and sunset. Thus, `sunrise+1/2` denotes the time halfway through the daylight period (solar noon).
-
-`sunset+0` denotes the time at which sunset occurs. The minus sign refers to the period of darkness between sunset and sunrise. Thus, `sunset+1/2` denotes the time halfway through the darkness period (solar midnight).
+Thus, `sunrise+0` denotes the moment of sunrise, while `sunrise+1/3` denotes the moment one third into the daylight period. At `sunrise+1/2`, known as "solar noon", the sun reaches its highest point in the sky. The opposite time, `sunset+1/2`, is "solar midnight".
 
 The above sample configuration will activate:
 
 - `base16-default-light` from sunrise to halfway through the day (solar noon)
 - `solarized` (light background) from solar noon until sunset
-- `solarized` (dark background) from sunset to sunrise
+- `solarized` (dark background) from sunset until sunrise (the entire darkness period)
 
-The above configuration also features two new variables. The first, `g:nd_latitude`, is **mandatory** when using any sun-relative times in your schedule. Indeed, it is the presence of `g:nd_latitude` that relative-time mode, so be sure to remove it if switching back to absolute time.
+Note that the above configuration also features two new variables. The first, `g:nd_latitude`, is **mandatory** when using sun-relative time. The presence of this variable in `vimrc` is the trigger that activates sun-relative time; to switch back to absolute time, simply remove it.
 
-There are 23 permitted values; choose the one nearest your current latitude.
+There are 23 permitted latitude values; choose the one nearest you.
 
 region          | permitted values for `g:nd_latitude`
 :--------------:|:-----------------------------------:
