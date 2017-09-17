@@ -2,6 +2,8 @@
 
 A **vim theme scheduler**. Divide your day into as many intervals as you like, assigning each interval its own theme.
 
+Intervals can be defined using **absolute time** (HH:MM) or **sun-relative time** (portions of day/night based on local sunrise/sunset times).
+
 ![](map.jpg)
 
 ## installation
