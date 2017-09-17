@@ -76,7 +76,7 @@ The above sample configuration will activate:
 - `solarized` (light background) from solar noon until sunset
 - `solarized` (dark background) from sunset until sunrise (the entire darkness period)
 
-Note that the above configuration also features two new variables. The first, `g:nd_latitude`, is **mandatory** when using sun-relative time. The presence of this variable in `vimrc` is the trigger that activates sun-relative time; to switch back to absolute time, simply remove it.
+Note that the above configuration also features two new variables. The first, `g:nd_latitude`, is **mandatory** when using sun-relative time. Indeed, the presence of this variable in `vimrc` is the trigger that activates sun-relative time; in order to switch back to absolute time, simply remove it.
 
 There are 23 permitted latitude values; choose the one nearest you.
 
@@ -101,9 +101,7 @@ let g:nd_timeshift = '0'
 
 ...where `LL` is the value closest to your current latitude. Then, from the vim command line, run `:call NdSchedule()`. This will print your theme schedule, including the precise times being used for sun-relative timings.
 
-Next, get today's exact sunrise/sunset times via an online search. (With something like "[YOUR LOCATION] sunrise sunset", Google will likely give you the information in one of those answer boxes.) Finally, set `nd_timeshift` to the appropriate value to achieve accurate sunrise/sunset times. Relaunch vim and run `:call NdSchedule()` again to confirm the offset.
-
-Note that it shouldn't be necessary for `g:nd_timeshift` to exceed a few hours in magnitude. Set it too high and the plugin will malfunction.
+Next, get today's exact sunrise/sunset times via an online search. (With something like "[YOUR LOCATION] sunrise sunset", Google will likely give you the information in one of those answer boxes.) Finally, set `nd_timeshift` to the appropriate value to get accurate sunrise/sunset times. Relaunch vim and run `:call NdSchedule()` again to confirm the offset.
 
 > If your region features daylight saving time (DST) for part of the year, you can take care of the adjustment automatically by wrapping `g:nd_timeshift` in an "if statement". For instance, to activate DST for March through September:
 >
