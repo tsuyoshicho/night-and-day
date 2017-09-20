@@ -15,8 +15,8 @@ let s:current_back = ''
 if exists('g:nd_latitude')
 
   if !matchstr(g:nd_latitude, '^-65$\|^-62.5$\|^-60$\|^-57.5$\|^-55$\|^-50$\|
-        \ ^-45$\|^-40$\|^-30$\|^-20$\|^-10$\|^0$\|^10$\|^20$\|^30$\|^40$\|
-        \ ^45$\|^50$\|^55$\|^57.5$\|^60$\|^62.5$\|^65$')
+        \^-45$\|^-40$\|^-30$\|^-20$\|^-10$\|^0$\|^10$\|^20$\|^30$\|^40$\|
+        \^45$\|^50$\|^55$\|^57.5$\|^60$\|^62.5$\|^65$')
     echomsg "NIGHT-AND-DAY PLUGIN - USER CONFIGURATION ERROR"
     echomsg "g:nd_latitude (in vimrc) is not set to one of these values:"
     echomsg " "
