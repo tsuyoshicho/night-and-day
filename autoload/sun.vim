@@ -817,10 +817,9 @@ function! sun#NdSundata()
   let g:nd_nightlength = 1440 - g:nd_daylength
 
   " adjust sunrise/set times by user-configured timeshift
-  if exists('g:nd_timeshift')
-    let g:nd_sunrise_minutes = g:nd_sunrise_minutes + g:nd_timeshift
-    let g:nd_sunset_minutes = g:nd_sunset_minutes + g:nd_timeshift
-  endif
+  let g:nd_timeshift = get(g:, 'nd_timeshift', 0)
+  let g:nd_sunrise_minutes = g:nd_sunrise_minutes + g:nd_timeshift
+  let g:nd_sunset_minutes = g:nd_sunset_minutes + g:nd_timeshift
 
   " wrap sunrise/set times to range 0-1439
   if g:nd_sunrise_minutes < 0

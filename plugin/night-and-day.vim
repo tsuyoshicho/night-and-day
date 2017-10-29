@@ -157,7 +157,7 @@ call add(s:themetime, 1440)
 function! NdSchedule()
   new | setlocal buftype=nofile
   call setline (1,'THEME SCHEDULE') | put = '==============' | put = ''
-  put = 'start time     theme name' | put = '----------     ----------'
+  put = 'start time      theme name' | put = '----------      ----------------'
   for i in range(0,len(g:nd_themes)-1)
     let s:hshow = s:themetime[i] / 60
     let s:mshow = s:themetime[i] - s:hshow * 60
@@ -167,7 +167,8 @@ function! NdSchedule()
     if len(s:mshow) == 1
       let s:mshow = '0' . s:mshow
     endif
-    put = s:hshow . ':' . s:mshow . '          ' . g:nd_themes[i][1]
+    put = s:hshow . ':' . s:mshow . '           ' .
+          \ g:nd_themes[i][1] . ' (' . g:nd_themes[i][2] . ')'
   endfor
   1
 endfunction
