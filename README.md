@@ -113,6 +113,32 @@ Next, get today's exact sunrise/sunset times via an online search. (With somethi
 > endif
 > ```
 
+### status line themes
+
+To add airline themes to your schedule, activate airline support with `let g:nd_airline = 1` and add the theme names as the fourth item on each line, like so:
+
+> Note: this example requires [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes) to be installed, in addition to [vim-airline](https://github.com/vim-airline/vim-airline).
+
+```
+let g:nd_themes = [
+  \ ['07:00', 'solarized', 'light', 'solarized' ],
+  \ ['08:00', 'solarized', 'dark' , 'solarized' ],
+  \ ]
+let g:nd_airline = 1
+```
+
+For lightline themes:
+
+> Note: this example requires [lightline.vim](https://github.com/itchyny/lightline.vim) to be installed.
+
+```
+let g:nd_themes = [
+  \ ['sunrise+0', 'base16-default-light', 'light' , 'Tomorrow' ],
+  \ ['sunset+0',  'base16-default-dark',  'dark'  , 'Tomorrow_Night'  ],
+  \ ]
+let g:nd_lightline = 1
+```
+
 ## notes
 
 This plugin incorporates the [vim-colorscheme-switcher](https://github.com/xolox/vim-colorscheme-switcher) by xolox.
