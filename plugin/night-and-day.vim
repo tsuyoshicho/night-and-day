@@ -10,6 +10,8 @@ endif
 " initialize variables for current theme and background state
 let s:current_theme = ''
 let s:current_back = ''
+let s:current_airline = ''
+let s:current_lightline = ''
 
 " check latitude/time format in vimrc, initialize sun data if needed
 if exists('g:nd_latitude')
@@ -187,6 +189,14 @@ endfor
 
 """ DEFINE SWITCH FUNCTIONS (for switching theme/background if necessary)
 
+" lightline theme switching
+function! NdSetLightlineColorscheme(name)
+    let g:lightline = { 'colorscheme': a:name }
+    call lightline#init()
+    call lightline#colorscheme()
+    call lightline#update()
+endfunction
+
 " switch to scheduled theme if not already active
 function! NdThemeSwitch(proposed_theme)
   if a:proposed_theme != s:current_theme
@@ -208,6 +218,25 @@ function! NdBackgroundSwitch(proposed_back)
   endif
 endfunction
 
+" switch to scheduled airline theme if not already active
+function! NdAirlineSwitch(proposed_airline)
+  if exists(':AirlineTheme')
+    if a:proposed_airline != s:current_airline
+      exec 'AirlineTheme ' . a:proposed_airline
+      let s:current_airline = a:proposed_airline
+    endif
+  endif
+endfunction
+
+" switch to scheduled lightline theme if not already active
+function! NdLightlineSwitch(proposed_lightline)
+  if a:proposed_lightline != s:current_lightline
+    call NdSetLightlineColorscheme(a:proposed_lightline)
+    let s:current_lightline = a:proposed_lightline
+  endif
+endfunction
+
+
 
 """ DEFINE CHECK FUNCTION (for detecting which theme/bg state should be active)
 
@@ -220,6 +249,18 @@ function! NdThemeCheck(timer)
   if s:timenow < s:themetime[0]
     call NdThemeSwitch(g:nd_themes[-1][1])
     call NdBackgroundSwitch(g:nd_themes[-1][2])
+    if exists('g:nd_themes[-1][3]')
+      if exists('g:nd_airline')
+        if g:nd_airline == 1
+          call NdAirlineSwitch(g:nd_themes[-1][3])
+        endif
+      endif
+      if exists('g:nd_lightline')
+        if g:nd_lightline == 1
+          call NdLightlineSwitch(g:nd_themes[-1][3])
+        endif
+      endif
+    endif
 
   else
     " otherwise, select theme with latest start-time before current time
@@ -227,6 +268,18 @@ function! NdThemeCheck(timer)
       if s:timenow + 1 > s:themetime[i] && s:timenow < s:themetime[i+1]
         call NdThemeSwitch(g:nd_themes[i][1])
         call NdBackgroundSwitch(g:nd_themes[i][2])
+        if exists('g:nd_themes[i][3]')
+          if exists('g:nd_airline')
+            if g:nd_airline == 1
+              call NdAirlineSwitch(g:nd_themes[i][3])
+            endif
+          endif
+          if exists('g:nd_lightline')
+            if g:nd_lightline == 1
+              call NdLightlineSwitch(g:nd_themes[i][3])
+            endif
+          endif
+        endif
       endif
     endfor
   endif
@@ -237,7 +290,7 @@ endfunction
 """ RUN PLUGIN
 
 " run immediately
-call NdThemeCheck('')
+autocmd VimEnter * call NdThemeCheck('')
 
 " run continuously
 if has ('timers')
