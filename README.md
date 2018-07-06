@@ -133,8 +133,8 @@ For lightline themes:
 
 ```
 let g:nd_themes = [
-  \ ['sunrise+0', 'base16-default-light', 'light' , 'Tomorrow' ],
-  \ ['sunset+0',  'base16-default-dark',  'dark'  , 'Tomorrow_Night'  ],
+  \ ['07:00', 'base16-default-light', 'light' , 'Tomorrow' ],
+  \ ['08:00', 'base16-default-dark',  'dark'  , 'Tomorrow_Night'  ],
   \ ]
 let g:nd_lightline = 1
 ```
