@@ -250,12 +250,12 @@ function! NdThemeCheck(timer)
     call NdThemeSwitch(g:nd_themes[-1][1])
     call NdBackgroundSwitch(g:nd_themes[-1][2])
     if exists('g:nd_themes[-1][3]')
-      if exists('g:nd_airline')
+      if exists('g:nd_airline') && exists('g:loaded_airline')
         if g:nd_airline == 1
           call NdAirlineSwitch(g:nd_themes[-1][3])
         endif
       endif
-      if exists('g:nd_lightline')
+      if exists('g:nd_lightline') && exists('g:loaded_lightline')
         if g:nd_lightline == 1
           call NdLightlineSwitch(g:nd_themes[-1][3])
         endif
@@ -269,12 +269,12 @@ function! NdThemeCheck(timer)
         call NdThemeSwitch(g:nd_themes[i][1])
         call NdBackgroundSwitch(g:nd_themes[i][2])
         if exists('g:nd_themes[i][3]')
-          if exists('g:nd_airline')
+          if exists('g:nd_airline') && exists('g:loaded_airline')
             if g:nd_airline == 1
               call NdAirlineSwitch(g:nd_themes[i][3])
             endif
           endif
-          if exists('g:nd_lightline')
+          if exists('g:nd_lightline') && exists('g:loaded_lightline')
             if g:nd_lightline == 1
               call NdLightlineSwitch(g:nd_themes[i][3])
             endif
@@ -290,11 +290,11 @@ endfunction
 """ RUN PLUGIN
 
 " run immediately
-autocmd VimEnter * call NdThemeCheck('')
+call NdThemeCheck('')
 
 " run continuously
 if has ('timers')
-  call timer_start(1000, 'NdThemeCheck', {'repeat': -1})
+  call timer_start(100, 'NdThemeCheck', {'repeat': -1})
 else
   autocmd CursorHold * call NdThemeCheck('')
 endif
