@@ -191,7 +191,11 @@ endfor
 
 " lightline theme switching
 function! NdSetLightlineColorscheme(name)
-    let g:lightline = { 'colorscheme': a:name }
+    let g:lightline = extend(
+          \ get(g:,'lightline', {}),
+          \ { 'colorscheme': a:name },
+          \ 'force')
+
     call lightline#init()
     call lightline#colorscheme()
     call lightline#update()
@@ -199,7 +203,7 @@ endfunction
 
 " switch to scheduled theme if not already active
 function! NdThemeSwitch(proposed_theme)
-  if a:proposed_theme != s:current_theme
+  if empty(s:current_theme) || a:proposed_theme != s:current_theme
     call xolox#colorscheme_switcher#switch_to(a:proposed_theme)
     let s:current_theme = a:proposed_theme
   endif
@@ -207,7 +211,7 @@ endfunction
 
 " switch to scheduled background state if not already active
 function! NdBackgroundSwitch(proposed_back)
-  if a:proposed_back != s:current_back
+  if empty(s:current_back) || a:proposed_back != s:current_back
     if a:proposed_back == 'dark'
       exec 'set background=dark'
       let s:current_back = 'dark'
@@ -221,7 +225,7 @@ endfunction
 " switch to scheduled airline theme if not already active
 function! NdAirlineSwitch(proposed_airline)
   if exists(':AirlineTheme')
-    if a:proposed_airline != s:current_airline
+    if empty(s:current_airline) || a:proposed_airline != s:current_airline
       exec 'AirlineTheme ' . a:proposed_airline
       let s:current_airline = a:proposed_airline
     endif
@@ -230,7 +234,7 @@ endfunction
 
 " switch to scheduled lightline theme if not already active
 function! NdLightlineSwitch(proposed_lightline)
-  if a:proposed_lightline != s:current_lightline
+  if empty(s:current_lightline) || a:proposed_lightline != s:current_lightline
     call NdSetLightlineColorscheme(a:proposed_lightline)
     let s:current_lightline = a:proposed_lightline
   endif
