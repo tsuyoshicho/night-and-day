@@ -203,7 +203,7 @@ endfunction
 
 " switch to scheduled theme if not already active
 function! NdThemeSwitch(proposed_theme)
-  let s:current_theme = g:colors_name
+  let s:current_theme = get(g:, 'colors_name', 'default')
   if a:proposed_theme != s:current_theme
     call xolox#colorscheme_switcher#switch_to(a:proposed_theme)
     let s:current_theme = a:proposed_theme
