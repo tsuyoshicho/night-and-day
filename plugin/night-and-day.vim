@@ -155,6 +155,24 @@ endwhile
 " append 'end-of-day time'
 call add(s:themetime, 1440)
 
+" debug
+function! NdDump()
+  split new
+  setlocal buftype=nofile
+  call setline(1, 'Dump:')
+  call setline(2, 's:current_theme'     . ':' . s:current_theme    )
+  call setline(3, 's:current_back'      . ':' . s:current_back     )
+  call setline(4, 's:current_airline'   . ':' . s:current_airline  )
+  call setline(5, 's:current_lightline' . ':' . s:current_lightline)
+  call setline(6, 'theme:' . get(g:, 'colors_name', 'default')     )
+  call setline(7, 'background:' . &background                      )
+  call setline(8, 'timenow:' . string(strftime ("%H") * 60 + strftime ("%M")))
+  call setline(9, 'Themes:')
+  call setline(10, map(copy(g:nd_themes), { i,v -> string(v) }))
+  call setline(len(g:nd_themes) + 10, 'Times:')
+  call setline(len(g:nd_themes) + 11, map(copy(s:themetime), { i,v -> string(v) }))
+endfunction
+
 " define 'view theme schedule' function
 function! NdSchedule()
   new | setlocal buftype=nofile
