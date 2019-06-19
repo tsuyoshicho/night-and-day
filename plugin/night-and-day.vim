@@ -1,5 +1,13 @@
 """ PRELIMINARIES
 
+if exists("g:loaded_night_and_date")
+  finish
+endif
+let g:loaded_night_and_date = 1
+
+let s:save_cpo = &cpo
+set cpo&vim
+
 " check if g:nd_themes is defined
 if !exists('g:nd_themes')
   echomsg "NIGHT-AND-DAY PLUGIN - USER CONFIGURATION ERROR"
@@ -292,6 +300,33 @@ function! NdThemeCheck(timer)
 
 endfunction
 
+""" TIMER
+" timer core function
+function! NdTimer(timer) abort
+  call NdThemeCheck('')
+
+  " restart timer : new interval time
+  call timer_start(s:NdNextInterval(), function("NdTimer"))
+endfunction
+
+" timer interval function(msec)
+function! s:NdNextInterval() abort
+  " adjust next updatetime : next min 01 sec point
+  " next updatetime = 1min(60sec) - current sec(ex 1min 25sec = 25sec) + 1 = 36sec -> msec
+  let interval = s:getPeriodicInterval(60,1) * 1000
+
+  return interval
+endfunction
+
+" base    base interval time (sec)
+" offset  offset time        (sec)
+function! s:getPeriodicInterval(base,offset) abort
+  let now = localtime()
+
+  let interval = (a:base - (now % a:base) + a:offset)
+
+  return interval
+endfunction
 
 """ RUN PLUGIN
 
@@ -300,7 +335,11 @@ call NdThemeCheck('')
 
 " run continuously
 if has ('timers')
-  call timer_start(100, 'NdThemeCheck', {'repeat': -1})
+  call timer_start(s:NdNextInterval(), function("NdTimer"))
 else
   autocmd CursorHold * call NdThemeCheck('')
 endif
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
+
