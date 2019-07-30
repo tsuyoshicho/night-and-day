@@ -259,8 +259,13 @@ function! NdThemeCheck(timer)
   " get current time (in minutes-after-midnight)
   let s:timenow = strftime ("%H") * 60 + strftime ("%M")
 
+  let target = 0
+  let nexttarget = 0
+
   " if start-time of first theme is later than current time, select last theme
   if s:timenow < s:themetime[0]
+    let target = len(g:nd_themes) - 1
+    let nexttarget = 0
     call NdThemeSwitch(g:nd_themes[-1][1])
     call NdBackgroundSwitch(g:nd_themes[-1][2])
     if exists('g:nd_themes[-1][3]')
@@ -280,6 +285,8 @@ function! NdThemeCheck(timer)
     " otherwise, select theme with latest start-time before current time
     for i in range(0,len(g:nd_themes)-1)
       if s:timenow + 1 > s:themetime[i] && s:timenow < s:themetime[i+1]
+        let target = i
+        let nexttarget = ((i + 1) > (len(g:nd_themes) - 1)) ? 0 : (i + 1)
         call NdThemeSwitch(g:nd_themes[i][1])
         call NdBackgroundSwitch(g:nd_themes[i][2])
         if exists('g:nd_themes[i][3]')
@@ -298,22 +305,35 @@ function! NdThemeCheck(timer)
     endfor
   endif
 
+  " need day over proces
+ let nextdiff = (s:themetime[nexttarget] + (60 * 24) - s:timenow) % (60 * 24)
+ if nextdiff > 60
+   return 0
+ else
+   return nextdiff + 1
+ endif
+
 endfunction
 
 """ TIMER
 " timer core function
 function! NdTimer(timer) abort
-  call NdThemeCheck('')
+  let next = NdThemeCheck('')
 
   " restart timer : new interval time
-  call timer_start(s:NdNextInterval(), function("NdTimer"))
+  call timer_start(s:NdNextInterval(next), function("NdTimer"))
 endfunction
 
 " timer interval function(msec)
-function! s:NdNextInterval() abort
+function! s:NdNextInterval(next) abort
   " adjust next updatetime : next min 01 sec point
   " next updatetime = 1min(60sec) - current sec(ex 1min 25sec = 25sec) + 1 = 36sec -> msec
-  let interval = s:getPeriodicInterval(60,1) * 1000
+  " base change to 1min to 1hour(60 * 60sec)
+  if 0 == a:next
+    let interval = s:getPeriodicInterval(60 * 60, 1) * 60 * 1000
+  else
+    let interval = a:next * 60 * 1000
+  endif
 
   return interval
 endfunction
@@ -331,14 +351,16 @@ endfunction
 """ RUN PLUGIN
 
 " run immediately
-call NdThemeCheck('')
+let s:next = NdThemeCheck('')
 
 " run continuously
 if has ('timers')
-  call timer_start(s:NdNextInterval(), function("NdTimer"))
+  call timer_start(s:NdNextInterval(s:next), function("NdTimer"))
 else
   autocmd CursorHold * call NdThemeCheck('')
 endif
+
+unlet s:next
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
