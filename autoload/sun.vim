@@ -745,31 +745,31 @@ let s:nd_sunset = [
       \]
 
 " convert latitude (from vimrc) to column number for above tables
-let s:nd_latitude_convert_table = [
-      \   -65,
-      \ -62.5,
-      \   -60,
-      \ -57.5,
-      \   -55,
-      \   -50,
-      \   -45,
-      \   -40,
-      \   -30,
-      \   -20,
-      \   -10,
-      \     0,
-      \    10,
-      \    20,
-      \    30,
-      \    40,
-      \    45,
-      \    50,
-      \    55,
-      \  57.5,
-      \    60,
-      \  62.5,
-      \    65,
-      \]
+let s:nd_latitude_convert_table = {
+      \   '-65':0,
+      \ '-62.5':1,
+      \   '-60':2,
+      \ '-57.5':3,
+      \   '-55':4,
+      \   '-50':5,
+      \   '-45':6,
+      \   '-40':7,
+      \   '-30':8,
+      \   '-20':9,
+      \   '-10':10,
+      \     '0':11,
+      \    '10':12,
+      \    '20':13,
+      \    '30':14,
+      \    '40':15,
+      \    '45':16,
+      \    '50':17,
+      \    '55':18,
+      \  '57.5':19,
+      \    '60':20,
+      \  '62.5':21,
+      \    '65':22,
+      \}
 
 function! sun#NdSundata()
   " get current day of year, accounting for leap year
@@ -780,7 +780,7 @@ function! sun#NdSundata()
   endif
 
   " get sunrise/set times for current day of year
-  let latitude_no = index(s:nd_latitude_convert_table, g:nd_latitude)
+  let latitude_no = s:nd_latitude_convert_table[g:nd_latitude]
   let g:nd_sunrise_minutes = s:nd_sunrise[s:day][latitude_no]
   let g:nd_sunset_minutes  = s:nd_sunset[s:day][latitude_no]
 
