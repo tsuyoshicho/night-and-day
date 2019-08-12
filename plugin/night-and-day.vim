@@ -340,6 +340,9 @@ else
   autocmd CursorHold * call NdThemeCheck('')
 endif
 
+" command
+command! NdSchedule :call night_and_day#schedule()
+
 let &cpo = s:save_cpo
 unlet s:save_cpo
 
